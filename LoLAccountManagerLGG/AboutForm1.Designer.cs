@@ -83,7 +83,7 @@
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(359, 380);
+            this.textBox2.Size = new System.Drawing.Size(359, 389);
             this.textBox2.TabIndex = 3;
             this.textBox2.Text = resources.GetString("textBox2.Text");
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -97,7 +97,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 16);
             this.label3.TabIndex = 4;
-            this.label3.Text = "v 1.0";
+            this.label3.Text = "v 1.1";
             // 
             // AboutForm1
             // 

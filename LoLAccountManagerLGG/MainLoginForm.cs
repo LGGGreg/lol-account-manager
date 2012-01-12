@@ -295,7 +295,12 @@ namespace LoLAccountManagerLGG
             string savedDate = tr.ReadLine();
             checkBox1RemeberUsername.Checked = (tr.ReadLine().Contains("true"));
             checkBox1RemeberPass.Checked = (tr.ReadLine().Contains("true"));
-            string line=tr.ReadLine();
+            string line = tr.ReadLine();
+            string[] lastparts = line.Split(':');
+            if (lastparts.Length > 1)
+            {
+                line = tr.ReadLine();
+            }            
             while (line != null)
             {
                 line = Crypto.DecryptStringAES(line, savedDate);
@@ -306,6 +311,11 @@ namespace LoLAccountManagerLGG
                 userPass.Add(userName, pass);
                 comboBox1.Items.Add(userName);
                 line = tr.ReadLine();
+            }
+            if (lastparts.Length > 1)
+            {
+                comboBox1.Text = lastparts[1];
+                comboBox1_SelectionChangeCommitted(null, null);                
             }
             tr.Close();
         }
@@ -318,6 +328,7 @@ namespace LoLAccountManagerLGG
             tw.WriteLine(currentDate);
             tw.WriteLine("Save Usernames: " + ((checkBox1RemeberUsername.Checked ? "true" : "false")));
             tw.WriteLine("Save Passwords: " + ((checkBox1RemeberPass.Checked ? "true" : "false")));
+            tw.WriteLine("Last Selected Name:" + comboBox1.Text);
             foreach (KeyValuePair<String,String> userData in userPass)
             {
                 string saveLine = userData.Key + "{{<LGG>}}" + userData.Value;

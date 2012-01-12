@@ -129,7 +129,6 @@ This program is portable, no installation or un-installation needed, settings ar
 This program uses encryption to protect your passwords, but being open source, it has a possibility of being cracked.  Please try not to give people your settings file if you choose to save passwords.
 You are also free to decompile or view the source code to ensure that I don't take your passwords either.
 
-Special Thanks to MiniDude22 for ideas on how to integrate it.
-</value>
+Special Thanks to MiniDude22 for ideas on how to integrate it.</value>
   </data>
 </root>
