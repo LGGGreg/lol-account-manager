@@ -37,6 +37,8 @@ namespace LoLAccountManagerLGG
         public static extern int GetPixel(IntPtr hDC, int x, int y);
         [DllImport("user32.dll")]
         public static extern IntPtr GetDC(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
         [DllImport("User32.dll")]
         public static extern IntPtr SetForegroundWindow(IntPtr hWnd);
         public struct BasicRect

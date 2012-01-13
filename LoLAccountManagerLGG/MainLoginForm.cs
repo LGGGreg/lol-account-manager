@@ -54,21 +54,31 @@ namespace LoLAccountManagerLGG
                 if (newBigSize != bigSize) { bigSize = newBigSize; backgroundWorkerWatchLoL.ReportProgress(0, "Update Size"); }
             }
         }
+
+        private int getColor(int x, int y)
+        {
+            int toReturn =-1;
+            IntPtr dc = WindowExternalHelpers.GetDC(loginWindowHandle);
+            toReturn=WindowExternalHelpers.GetPixel(dc, x, y);
+            WindowExternalHelpers.ReleaseDC(loginWindowHandle, dc);
+            return toReturn;
+        }
+           
         private bool isLoggingInNow()
         {
             // check colors of lol window to determine if the login screen is visible
             if (bigSize)
             {
-                int color1 = WindowExternalHelpers.GetPixel(WindowExternalHelpers.GetDC(loginWindowHandle), 1011, 90);
-                int color2 = WindowExternalHelpers.GetPixel(WindowExternalHelpers.GetDC(loginWindowHandle), 953, 195);
-                int color3 = WindowExternalHelpers.GetPixel(WindowExternalHelpers.GetDC(loginWindowHandle), 1099, 194);
+                int color1 = getColor(1011, 90);
+                int color2 = getColor( 953, 195);
+                int color3 = getColor( 1099, 194);
                 if (color1 == 1192999 && color2==3167817 && color3==2511169) return true;
             }
             else
             {
-                int color1 = WindowExternalHelpers.GetPixel(WindowExternalHelpers.GetDC(loginWindowHandle), 808, 72);
-                int color2 = WindowExternalHelpers.GetPixel(WindowExternalHelpers.GetDC(loginWindowHandle), 749, 155);
-                int color3 = WindowExternalHelpers.GetPixel(WindowExternalHelpers.GetDC(loginWindowHandle), 910, 100);
+                int color1 = getColor( 808, 72);
+                int color2 = getColor( 749, 155);
+                int color3 = getColor( 910, 100);
                 if (color1 == 2375220&& color2==3959907&& color3==3094067) return true;
             }
             return false;
