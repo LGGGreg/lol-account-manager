@@ -91,7 +91,6 @@ namespace LoLAccountManagerLGG
                 bool loggingInNow = false;
                 if (WindowExternalHelpers.IsWindow(loginWindowHandle))
                 {
-                    backgroundWorkerWatchLoL.ReportProgress(6);
                     trackLoginWindow();
                     if(WindowExternalHelpers.IsWindowVisible(loginWindowHandle))
                         loggingInNow = isLoggingInNow();
