@@ -29,11 +29,11 @@ namespace LoLAccountManagerLGG
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll")]
         public static extern bool IsWindowVisible(IntPtr hWnd);
-        [DllImport("user32.dll",CharSet=CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr mouse_event(uint dwFlags, int dx, int dy, IntPtr dwData, IntPtr dwExtraInfo);
-        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]       
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
         public static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
-        [DllImport("gdi32.dll")]        
+        [DllImport("gdi32.dll")]
         public static extern int GetPixel(IntPtr hDC, int x, int y);
         [DllImport("user32.dll")]
         public static extern IntPtr GetDC(IntPtr hWnd);
@@ -41,13 +41,48 @@ namespace LoLAccountManagerLGG
         public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
         [DllImport("User32.dll")]
         public static extern IntPtr SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        public static string getRealWindowText(IntPtr hWnd)
+        {
+            StringBuilder sb = new StringBuilder(90);
+            GetWindowText(hWnd, sb, sb.Capacity);
+            return sb.ToString();
+        }
+        public static bool isTopWindow(IntPtr hWnd)
+        {
+            IntPtr topWindow = GetForegroundWindow();
+            if (hWnd == topWindow)
+                return true;
+            return false;
+        }
+        //adrian wtf with this.
+        public static bool isNextToTopWindow(IntPtr hWnd)
+        {
+            IntPtr secondWindow = GetWindow(GetForegroundWindow(), 2);
+            //string text = getRealWindowText(secondWindow);
+            if (hWnd == secondWindow) return true;
+            
+            return false;
+        } 
+
+        public const int WM_SYSCOMMAND = 0x0112;
+        public const int SC_CLOSE = 0xF060;
+
         public struct BasicRect
         {
             public int Left;
             public int Top;
             public int Right;
             public int Bottom;
-        }        
+        }
     }
     public class Crypto
     {

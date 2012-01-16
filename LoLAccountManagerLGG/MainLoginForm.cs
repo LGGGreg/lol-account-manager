@@ -48,10 +48,12 @@ namespace LoLAccountManagerLGG
                 newloginWindowRect.Width = _basicRect.Right - _basicRect.Left;
                 newloginWindowRect.Height = _basicRect.Bottom - _basicRect.Top;
 
-                if (!loginWindowRect.Equals(newloginWindowRect))
-                    {loginWindowRect = newloginWindowRect; backgroundWorkerWatchLoL.ReportProgress(0, "Update Pos");}
-                bool newBigSize = loginWindowRect.Width >= 1280;
+                bool newBigSize = newloginWindowRect.Width >= 1280;
                 if (newBigSize != bigSize) { bigSize = newBigSize; backgroundWorkerWatchLoL.ReportProgress(0, "Update Size"); }
+
+                if (!loginWindowRect.Equals(newloginWindowRect))
+                { loginWindowRect = newloginWindowRect; backgroundWorkerWatchLoL.ReportProgress(0, "Update Pos"); }
+                
             }
         }
 
@@ -66,6 +68,16 @@ namespace LoLAccountManagerLGG
            
         private bool isLoggingInNow()
         {
+            // check if the user can actually see the window >.>
+            if (loggingIn)
+            {
+                if (WindowExternalHelpers.isNextToTopWindow(loginWindowHandle) == false) return false;
+            }
+            else
+            {
+                if (WindowExternalHelpers.isTopWindow(loginWindowHandle) == false) return false;
+            }
+                                
             // check colors of lol window to determine if the login screen is visible
             if (bigSize)
             {
@@ -92,8 +104,10 @@ namespace LoLAccountManagerLGG
                 if (WindowExternalHelpers.IsWindow(loginWindowHandle))
                 {
                     trackLoginWindow();
-                    if(WindowExternalHelpers.IsWindowVisible(loginWindowHandle))
+                    if (WindowExternalHelpers.IsWindowVisible(loginWindowHandle))
+                    {
                         loggingInNow = isLoggingInNow();
+                    }
                 }
                 else
                 {
@@ -117,14 +131,19 @@ namespace LoLAccountManagerLGG
 
                 case "Update Size":
                     updateSize();
+                    updatePos();
                     return;
                 case "Update Pos":
-                    if(bigSize)
-                        Location = new Point(loginWindowRect.X + 827, loginWindowRect.Y + 274);
-                    else
-                        Location = new Point(loginWindowRect.X + 662, loginWindowRect.Y + 219);
+                    updatePos();
                     return;
             }
+        }
+        private void updatePos()
+        {
+            if (bigSize)
+                Location = new Point(loginWindowRect.X + 827, loginWindowRect.Y + 274);
+            else
+                Location = new Point(loginWindowRect.X + 662, loginWindowRect.Y + 219);
         }
         private void updateSize()
         {
@@ -154,7 +173,7 @@ namespace LoLAccountManagerLGG
                 this.button1LogIn.Location = new System.Drawing.Point(231, 131);
                 this.button1LogIn.Size = new System.Drawing.Size(99, 35);
                 this.button1deleteentry.Location = new System.Drawing.Point(334, 38);
-                this.button1deleteentry.Size = new System.Drawing.Size(26, 25);
+                this.button1deleteentry.Size = new System.Drawing.Size(26, 25);               
                 
             }
             else
@@ -184,6 +203,9 @@ namespace LoLAccountManagerLGG
                 this.button1deleteentry.Location = new System.Drawing.Point(181+80+4, 28);
                 this.button1deleteentry.Size = new System.Drawing.Size(20, 20);               
             }
+            this.Refresh();
+            this.Invalidate(true);
+            Application.DoEvents();
         }
         private void updateVisibility()
         {

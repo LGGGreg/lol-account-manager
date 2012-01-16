@@ -33,6 +33,7 @@
             this.backgroundWorkerWatchLoL = new System.ComponentModel.BackgroundWorker();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.loLAccountManagerLGGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,6 @@
             this.button1LogIn = new System.Windows.Forms.Button();
             this.button1deleteentry = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.loLAccountManagerLGGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +75,13 @@
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.Size = new System.Drawing.Size(380, 104);
             this.contextMenuStrip1.Text = "LoL Account Manager LGG";
+            // 
+            // loLAccountManagerLGGToolStripMenuItem
+            // 
+            this.loLAccountManagerLGGToolStripMenuItem.Enabled = false;
+            this.loLAccountManagerLGGToolStripMenuItem.Name = "loLAccountManagerLGGToolStripMenuItem";
+            this.loLAccountManagerLGGToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
+            this.loLAccountManagerLGGToolStripMenuItem.Text = "LoL Account Manager LGG";
             // 
             // aboutToolStripMenuItem
             // 
@@ -198,13 +205,6 @@
             this.toolTip1.AutoPopDelay = 5000;
             this.toolTip1.InitialDelay = 200;
             this.toolTip1.ReshowDelay = 100;
-            // 
-            // loLAccountManagerLGGToolStripMenuItem
-            // 
-            this.loLAccountManagerLGGToolStripMenuItem.Enabled = false;
-            this.loLAccountManagerLGGToolStripMenuItem.Name = "loLAccountManagerLGGToolStripMenuItem";
-            this.loLAccountManagerLGGToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
-            this.loLAccountManagerLGGToolStripMenuItem.Text = "LoL Account Manager LGG";
             // 
             // MainLoginForm
             // 
