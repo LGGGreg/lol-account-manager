@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.IO;
+using System.Diagnostics;
 
 namespace LoLAccountManagerLGG
 {
@@ -17,6 +18,7 @@ namespace LoLAccountManagerLGG
         #region vars
         private Rectangle loginWindowRect = new Rectangle(1,1,1,1);
         private IntPtr loginWindowHandle = IntPtr.Zero;
+        private IntPtr myHandle = IntPtr.Zero;
         private bool bigSize = true;
         private bool loggingIn=false;
         private bool getOutOfMyWay = false;
@@ -69,14 +71,10 @@ namespace LoLAccountManagerLGG
         private bool isLoggingInNow()
         {
             // check if the user can actually see the window >.>
-            if (loggingIn)
-            {
-                if (WindowExternalHelpers.isNextToTopWindow(loginWindowHandle) == false) return false;
-            }
-            else
-            {
-                if (WindowExternalHelpers.isTopWindow(loginWindowHandle) == false) return false;
-            }
+            
+            if (!(WindowExternalHelpers.isTopWindow(loginWindowHandle) ||
+                WindowExternalHelpers.isTopWindow(myHandle))) return false;
+
                                 
             // check colors of lol window to determine if the login screen is visible
             if (bigSize)
@@ -95,10 +93,14 @@ namespace LoLAccountManagerLGG
             }
             return false;
         }
+
         private void backgroundWorkerWatchLoL_DoWork(object sender, DoWorkEventArgs e)
         {
             while (!backgroundWorkerWatchLoL.CancellationPending)
             {
+                if (!WindowExternalHelpers.IsWindow(myHandle))
+                    myHandle = WindowExternalHelpers.FindWindowByCaption(IntPtr.Zero, "LoL Account Manager");
+
                 //constantly check if lol login screen exists and its size/pos
                 bool loggingInNow = false;
                 if (WindowExternalHelpers.IsWindow(loginWindowHandle))
@@ -113,10 +115,11 @@ namespace LoLAccountManagerLGG
                 {
                     loginWindowHandle = WindowExternalHelpers.FindWindowByCaption(IntPtr.Zero, "PVP.net Client");
                 }
+                
                 if (loggingInNow != loggingIn) 
                 { loggingIn = loggingInNow; backgroundWorkerWatchLoL.ReportProgress(0, "Update Visible"); }
 
-                Thread.Sleep(30);
+                Thread.Sleep(200);
             }
         }        
         private void backgroundWorkerWatchLoL_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -233,9 +236,15 @@ namespace LoLAccountManagerLGG
         {
             //change the login button's enabled if we can log in
             if ((textBox1Password.Text.Length > 0 && comboBox1.Text.Length > 0) && !button1LogIn.Enabled)
+            {
+                this.button1LogIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(118)))), ((int)(((byte)(0)))));
                 button1LogIn.Enabled = true;
-            if ((textBox1Password.Text.Length <= 0 ||  comboBox1.Text.Length <= 0) && button1LogIn.Enabled)
+            }
+            if ((textBox1Password.Text.Length <= 0 || comboBox1.Text.Length <= 0) && button1LogIn.Enabled)
+            {
+                this.button1LogIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
                 button1LogIn.Enabled = false;
+            }
         }
 
         private void button1LogIn_Click(object sender, EventArgs e)

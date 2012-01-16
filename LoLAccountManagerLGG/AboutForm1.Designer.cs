@@ -97,7 +97,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 16);
             this.label3.TabIndex = 4;
-            this.label3.Text = "v 1.2";
+            this.label3.Text = "v 1.3";
             // 
             // AboutForm1
             // 
@@ -106,7 +106,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(30)))));
             this.BackgroundImage = global::LoLAccountManagerLGG.Properties.Resources.iconIMG;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(376, 452);
+            this.ClientSize = new System.Drawing.Size(376, 455);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
