@@ -206,9 +206,11 @@ namespace LoLAccountManagerLGG
                 this.button1deleteentry.Location = new System.Drawing.Point(181+80+4, 28);
                 this.button1deleteentry.Size = new System.Drawing.Size(20, 20);               
             }
+            Hide();
             this.Refresh();
             this.Invalidate(true);
             Application.DoEvents();
+            Show();
         }
         private void updateVisibility()
         {
