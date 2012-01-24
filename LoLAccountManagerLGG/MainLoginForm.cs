@@ -210,7 +210,7 @@ namespace LoLAccountManagerLGG
             this.Refresh();
             this.Invalidate(true);
             Application.DoEvents();
-            Show();
+            updateVisibility();
         }
         private void updateVisibility()
         {
