@@ -130,6 +130,7 @@ namespace LoLAccountManagerLGG
             {
                 case "Update Visible":
                     updateVisibility();
+                    updatePos();
                     return;
 
                 case "Update Size":

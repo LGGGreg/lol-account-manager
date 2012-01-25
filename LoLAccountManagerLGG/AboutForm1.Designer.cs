@@ -97,7 +97,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 16);
             this.label3.TabIndex = 4;
-            this.label3.Text = "v 1.4";
+            this.label3.Text = "v 1.5";
             // 
             // AboutForm1
             // 
