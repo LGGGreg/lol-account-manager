@@ -22,7 +22,10 @@ namespace LoLAccountManagerLGG
         private bool bigSize = true;
         private bool loggingIn=false;
         private bool getOutOfMyWay = false;
+        private bool sizePending = false;
+        private DebugDisplay debugDisp;
         private Dictionary<String, String> userPass = new Dictionary<String, String>();
+        private StringBuilder logBuilder;
         const string saveFileName = "LoLLogins.txt";
         #endregion
         public MainLoginForm()
@@ -33,6 +36,7 @@ namespace LoLAccountManagerLGG
         {
             //background worker watches for the login screen to overlay
             backgroundWorkerWatchLoL.RunWorkerAsync();
+            updateSize();
             updateVisibility();
             load();
         }
@@ -49,9 +53,16 @@ namespace LoLAccountManagerLGG
                 newloginWindowRect.Y = _basicRect.Top;
                 newloginWindowRect.Width = _basicRect.Right - _basicRect.Left;
                 newloginWindowRect.Height = _basicRect.Bottom - _basicRect.Top;
+                if (newloginWindowRect.Width <= 160 || newloginWindowRect.Width > 10000) return;
 
                 bool newBigSize = newloginWindowRect.Width >= 1280;
-                if (newBigSize != bigSize) { bigSize = newBigSize; backgroundWorkerWatchLoL.ReportProgress(0, "Update Size"); }
+                if (newBigSize != bigSize) 
+                {
+                    bigSize = newBigSize;
+                    addLog("Size changed because windows was detected at size " + newloginWindowRect.Width.ToString());
+                    backgroundWorkerWatchLoL.ReportProgress(0, "Update Size");
+
+                }
 
                 if (!loginWindowRect.Equals(newloginWindowRect))
                 { loginWindowRect = newloginWindowRect; backgroundWorkerWatchLoL.ReportProgress(0, "Update Pos"); }
@@ -148,11 +159,24 @@ namespace LoLAccountManagerLGG
                 Location = new Point(loginWindowRect.X + 827, loginWindowRect.Y + 274);
             else
                 Location = new Point(loginWindowRect.X + 662, loginWindowRect.Y + 219);
+
+            addLog("Finished Updating Location to " + Location.X.ToString()+","+Location.Y.ToString());
         }
-        private void updateSize()
+        private void updateSize(bool force=false,bool forceTo=false)
         {
+            bool sizeToSet = bigSize;
+            if (force)
+            {
+                sizeToSet = forceTo;
+            }
+            if (!Visible) sizePending = true;
+            else if (sizePending)
+            {
+                sizePending = false;
+            }
+
             //move form fields to match login screen.
-            if (bigSize)
+            if (sizeToSet)
             {
                 Size = new Size(365, 192);
                 this.label1UserName.Location=new Point(27, 12);
@@ -207,6 +231,8 @@ namespace LoLAccountManagerLGG
                 this.button1deleteentry.Location = new System.Drawing.Point(181+80+4, 28);
                 this.button1deleteentry.Size = new System.Drawing.Size(20, 20);               
             }
+
+            addLog("Finished Updating Size to " + (sizeToSet ? "Big" : "Small"));
             Hide();
             this.Refresh();
             this.Invalidate(true);
@@ -219,6 +245,7 @@ namespace LoLAccountManagerLGG
             {
                 Show();
                 Visible = true;
+                if (sizePending) updateSize();
                 WindowState = FormWindowState.Normal;
             }
             else
@@ -227,6 +254,7 @@ namespace LoLAccountManagerLGG
                 Visible = false;
                 WindowState = FormWindowState.Minimized;
             }
+            addLog("Finished Updating visibility to " + (Visible ? "True" : "false"));
             Application.DoEvents();
         }
         #endregion
@@ -387,6 +415,44 @@ namespace LoLAccountManagerLGG
             AboutForm1 form = new AboutForm1();
             form.StartPosition = FormStartPosition.CenterScreen;
             form.ShowDialog();
+        }
+
+        private void button1LogDisplay_Click(object sender, EventArgs e)
+        {
+            if (debugDisp == null)debugDisp = new DebugDisplay(this);
+            if (debugDisp.IsDisposed) debugDisp = new DebugDisplay(this);
+            debugDisp.StartPosition = FormStartPosition.Manual;
+            debugDisp.Location = new Point(0, 0);
+            debugDisp.Visible = true;
+        }
+
+        private void addLog(String textLine)
+        {
+            if (logBuilder == null) logBuilder = new StringBuilder("");
+            logBuilder.AppendLine(textLine);
+
+            if (logBuilder.Length > 10000) logBuilder = new StringBuilder("Log Erased to save memory.");
+
+
+            if (debugDisp == null) return;
+            if (debugDisp.IsDisposed) return;
+            debugDisp.textBox2debug.Text = logBuilder.ToString();
+
+        }
+        public void clearLog()
+        {
+            logBuilder = new StringBuilder("");
+            addLog("Log Cleared.");
+        }
+
+        private void button1getBig_Click(object sender, EventArgs e)
+        {
+            updateSize(true, true);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            updateSize(true, false);
         }
         
     }

@@ -53,6 +53,12 @@
     <Compile Include="AboutForm1.Designer.cs">
       <DependentUpon>AboutForm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DebugDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugDisplay.Designer.cs">
+      <DependentUpon>DebugDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     <Compile Include="WindowHelpers.cs" />
     <EmbeddedResource Include="AboutForm1.resx">
       <DependentUpon>AboutForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugDisplay.resx">
+      <DependentUpon>DebugDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainLoginForm.resx">
       <DependentUpon>MainLoginForm.cs</DependentUpon>
