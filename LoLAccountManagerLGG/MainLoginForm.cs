@@ -27,15 +27,30 @@ namespace LoLAccountManagerLGG
         private Dictionary<String, String> userPass = new Dictionary<String, String>();
         private StringBuilder logBuilder;
         const string saveFileName = "LoLLogins.txt";
+        private searchableImage bigSearchImage;
+        private searchableImage smallSearchImage;
         #endregion
         public MainLoginForm()
         {
+            bigSearchImage = new searchableImage(
+                   new List<pointAndColorPair>(new pointAndColorPair[] {
+                    new pointAndColorPair(1011, 90, 1192999),
+                    new pointAndColorPair(953, 195, 3167817),
+                    new pointAndColorPair(1099, 194, 2511169),
+                }),new Point(-182,186));
+            smallSearchImage = new searchableImage(
+                new List<pointAndColorPair>(new pointAndColorPair[] {
+                    new pointAndColorPair(808, 72, 2375220),
+                    new pointAndColorPair(749, 155, 3959907),
+                    new pointAndColorPair(910, 100, 3094067),
+                }),new Point(-182-165,186-55));
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             //background worker watches for the login screen to overlay
             backgroundWorkerWatchLoL.RunWorkerAsync();
+            
             updateSize();
             updateVisibility();
             load();
@@ -78,6 +93,39 @@ namespace LoLAccountManagerLGG
             WindowExternalHelpers.ReleaseDC(loginWindowHandle, dc);
             return toReturn;
         }
+        private Bitmap getScreenArea()
+        {
+            IntPtr hBmp;
+            IntPtr dc = WindowExternalHelpers.GetDC(loginWindowHandle);
+            IntPtr hdcCompatible = WindowExternalHelpers.CreateCompatibleDC(dc);
+            hBmp = WindowExternalHelpers.CreateCompatibleBitmap(dc, loginWindowRect.Width, loginWindowRect.Height);
+
+            if (hBmp != IntPtr.Zero)
+            {
+                IntPtr hOldBmp = (IntPtr)WindowExternalHelpers.SelectObject(hdcCompatible, hBmp);
+                WindowExternalHelpers.BitBlt(hdcCompatible, 0, 0, loginWindowRect.Width, loginWindowRect.Height, dc, 0, 0, 13369376);
+
+                WindowExternalHelpers.SelectObject(hdcCompatible, hOldBmp);
+                WindowExternalHelpers.DeleteDC(hdcCompatible);
+                WindowExternalHelpers.ReleaseDC(loginWindowHandle, dc);
+
+                Bitmap bmp = System.Drawing.Image.FromHbitmap(hBmp);
+
+                WindowExternalHelpers.DeleteObject(hBmp);
+                GC.Collect();
+
+                return bmp;
+            }
+            return null;
+        }
+        private void saveScreenArea(String fileName = "")
+        {
+            Bitmap bitmap = getScreenArea();
+            if (fileName == "") fileName = "SnapText" + System.Environment.TickCount + ".jpeg";
+            String FilePath = fileName;
+
+            bitmap.Save(FilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
            
         private bool isLoggingInNow()
         {
@@ -90,19 +138,12 @@ namespace LoLAccountManagerLGG
             // check colors of lol window to determine if the login screen is visible
             if (bigSize)
             {
-                int color1 = getColor(1011, 90);
-                int color2 = getColor( 953, 195);
-                int color3 = getColor( 1099, 194);
-                if (color1 == 1192999 && color2==3167817 && color3==2511169) return true;
+                return bigSearchImage.foundInScreen(loginWindowHandle, loginWindowRect);
             }
             else
             {
-                int color1 = getColor( 808, 72);
-                int color2 = getColor( 749, 155);
-                int color3 = getColor( 910, 100);
-                if (color1 == 2375220&& color2==3959907&& color3==3094067) return true;
+                return smallSearchImage.foundInScreen(loginWindowHandle, loginWindowRect);
             }
-            return false;
         }
 
         private void backgroundWorkerWatchLoL_DoWork(object sender, DoWorkEventArgs e)
@@ -156,7 +197,9 @@ namespace LoLAccountManagerLGG
         private void updatePos()
         {
             if (bigSize)
-                Location = new Point(loginWindowRect.X + 827, loginWindowRect.Y + 274);
+                Location = //new Point(loginWindowRect.X + 827, loginWindowRect.Y + 274);
+                    new Point(loginWindowRect.X+bigSearchImage.getLastFoundPosition().X,
+                        loginWindowRect.Y+bigSearchImage.getLastFoundPosition().Y);
             else
                 Location = new Point(loginWindowRect.X + 662, loginWindowRect.Y + 219);
 
@@ -454,6 +497,11 @@ namespace LoLAccountManagerLGG
         {
             updateSize(true, false);
         }
+
+        private void snapTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveScreenArea("");
+        }
         
-    }
+    }    
 }

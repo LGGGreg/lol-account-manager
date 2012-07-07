@@ -59,6 +59,7 @@
     <Compile Include="DebugDisplay.Designer.cs">
       <DependentUpon>DebugDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageDetection.cs" />
     <Compile Include="MainLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

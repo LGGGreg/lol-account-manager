@@ -36,6 +36,7 @@
             this.loLAccountManagerLGGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.snapTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1UserName = new System.Windows.Forms.Label();
             this.label1Password = new System.Windows.Forms.Label();
@@ -73,10 +74,11 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loLAccountManagerLGGToolStripMenuItem,
             this.aboutToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.snapTestToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(380, 104);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(380, 130);
             this.contextMenuStrip1.Text = "LoL Account Manager LGG";
             // 
             // loLAccountManagerLGGToolStripMenuItem
@@ -99,6 +101,14 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // snapTestToolStripMenuItem
+            // 
+            this.snapTestToolStripMenuItem.Name = "snapTestToolStripMenuItem";
+            this.snapTestToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
+            this.snapTestToolStripMenuItem.Text = "Snap Test";
+            this.snapTestToolStripMenuItem.Visible = false;
+            this.snapTestToolStripMenuItem.Click += new System.EventHandler(this.snapTestToolStripMenuItem_Click);
             // 
             // comboBox1
             // 
@@ -155,7 +165,7 @@
             this.checkBox1RemeberUsername.ForeColor = System.Drawing.Color.White;
             this.checkBox1RemeberUsername.Location = new System.Drawing.Point(27, 129);
             this.checkBox1RemeberUsername.Name = "checkBox1RemeberUsername";
-            this.checkBox1RemeberUsername.Size = new System.Drawing.Size(177, 26);
+            this.checkBox1RemeberUsername.Size = new System.Drawing.Size(176, 26);
             this.checkBox1RemeberUsername.TabIndex = 5;
             this.checkBox1RemeberUsername.Text = "Remember Username";
             this.checkBox1RemeberUsername.UseVisualStyleBackColor = true;
@@ -167,7 +177,7 @@
             this.checkBox1RemeberPass.ForeColor = System.Drawing.Color.White;
             this.checkBox1RemeberPass.Location = new System.Drawing.Point(27, 155);
             this.checkBox1RemeberPass.Name = "checkBox1RemeberPass";
-            this.checkBox1RemeberPass.Size = new System.Drawing.Size(171, 26);
+            this.checkBox1RemeberPass.Size = new System.Drawing.Size(170, 26);
             this.checkBox1RemeberPass.TabIndex = 6;
             this.checkBox1RemeberPass.Text = "Remember Password";
             this.checkBox1RemeberPass.UseVisualStyleBackColor = true;
@@ -301,6 +311,7 @@
         private System.Windows.Forms.Button button1LogDisplay;
         private System.Windows.Forms.Button button1getBig;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem snapTestToolStripMenuItem;
     }
 }
 
