@@ -83,22 +83,29 @@ namespace LoLAccountManagerLGG
                 {
                     if (bmp.GetPixel(scanX, scanY) == theFirstOne.color)
                     {
+                        bool complete = true;                            
                         //first color detected, check others now
                         foreach (pointAndColorPair pp in pointPairs)
                         {
                             Point relativePosition = new Point(pp.x - theFirstOne.x, pp.y - theFirstOne.y);
-                            if (bmp.GetPixel(scanX + relativePosition.X, scanY + relativePosition.Y) == pp.color)
+                            Color foundColor = bmp.GetPixel(scanX + relativePosition.X, scanY + relativePosition.Y);
+                            if (foundColor == pp.color)
                             {
                                 //good!
                             }
                             else
                             {
-                                return false;
+                                //return false;
+                                complete = false;
+                                break;
                             }
                         }
-                        lastFoundPosition = new Point(scanX + loginOffset.X, scanY + loginOffset.Y);
-                        return true;
-
+                        if (complete)
+                        {
+                            lastFoundPosition = new Point(scanX + loginOffset.X, scanY + loginOffset.Y);
+                            return true;
+                        }
+                        
                     }
                 }
             }

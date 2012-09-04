@@ -33,11 +33,17 @@ namespace LoLAccountManagerLGG
         public MainLoginForm()
         {
             bigSearchImage = new searchableImage(
-                   new List<pointAndColorPair>(new pointAndColorPair[] {
-                    new pointAndColorPair(1011, 90, 1192999),
-                    new pointAndColorPair(953, 195, 3167817),
-                    new pointAndColorPair(1099, 194, 2511169),
-                }),new Point(-182,186));
+                new List<pointAndColorPair>(new pointAndColorPair[]{
+                    new pointAndColorPair(110, 311, 16777215),
+                    new pointAndColorPair(110, 321, 16777215),
+                    new pointAndColorPair(110, 332, 16777215),
+                    new pointAndColorPair(407, 312, 16777215),
+                    new pointAndColorPair(406, 322, 16777215),
+                    new pointAndColorPair(407, 332, 16777215),
+                    new pointAndColorPair(244, 312, 16777215)//81 272                
+                }),new Point(-30,-36));//search for them white boxen so we don't miss
+
+
             smallSearchImage = new searchableImage(
                 new List<pointAndColorPair>(new pointAndColorPair[] {
                     new pointAndColorPair(808, 72, 2375220),
@@ -221,7 +227,7 @@ namespace LoLAccountManagerLGG
             //move form fields to match login screen.
             if (sizeToSet)
             {
-                Size = new Size(365, 192);
+                Size = new Size(365, 190);
                 this.label1UserName.Location=new Point(27, 12);
                 this.label1UserName.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.label1UserName.Size = new System.Drawing.Size(80, 22);
@@ -346,6 +352,7 @@ namespace LoLAccountManagerLGG
             SendKeys.SendWait("{BS 50}");
             SendKeys.SendWait(textBox1Password.Text);
             //press enter to log in
+            Thread.Sleep(500);
             SendKeys.SendWait("{ENTER}");
 
             if (checkBox1RemeberUsername.Checked)
