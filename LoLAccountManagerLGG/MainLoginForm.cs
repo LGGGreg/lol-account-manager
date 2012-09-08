@@ -509,6 +509,11 @@ namespace LoLAccountManagerLGG
         {
             saveScreenArea("");
         }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            button1LogDisplay_Click(sender, e);
+        }
         
     }    
 }

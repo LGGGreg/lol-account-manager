@@ -88,16 +88,23 @@ namespace LoLAccountManagerLGG
                         foreach (pointAndColorPair pp in pointPairs)
                         {
                             Point relativePosition = new Point(pp.x - theFirstOne.x, pp.y - theFirstOne.y);
-                            Color foundColor = bmp.GetPixel(scanX + relativePosition.X, scanY + relativePosition.Y);
-                            if (foundColor == pp.color)
+                            try
                             {
-                                //good!
+                                Color foundColor = bmp.GetPixel(scanX + relativePosition.X, scanY + relativePosition.Y);
+                                if (foundColor == pp.color)
+                                {
+                                    //good!
+                                }
+                                else
+                                {
+                                    //return false;
+                                    complete = false;
+                                    break;
+                                }
                             }
-                            else
+                            catch 
                             {
-                                //return false;
-                                complete = false;
-                                break;
+                                //nothing important here
                             }
                         }
                         if (complete)

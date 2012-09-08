@@ -49,6 +49,7 @@
             this.button1LogDisplay = new System.Windows.Forms.Button();
             this.button1getBig = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,10 +76,11 @@
             this.loLAccountManagerLGGToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem,
-            this.snapTestToolStripMenuItem});
+            this.snapTestToolStripMenuItem,
+            this.debugToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(380, 130);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(380, 156);
             this.contextMenuStrip1.Text = "LoL Account Manager LGG";
             // 
             // loLAccountManagerLGGToolStripMenuItem
@@ -258,6 +260,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Visible = false;
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
+            // 
             // MainLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,6 +322,7 @@
         private System.Windows.Forms.Button button1getBig;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem snapTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
     }
 }
 
