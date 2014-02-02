@@ -34,14 +34,20 @@ namespace LoLAccountManagerLGG
         {
             bigSearchImage = new searchableImage(
                 new List<pointAndColorPair>(new pointAndColorPair[]{
-                    new pointAndColorPair(110, 311, 16777215),
-                    new pointAndColorPair(110, 321, 16777215),
-                    new pointAndColorPair(110, 332, 16777215),
-                    new pointAndColorPair(407, 312, 16777215),
-                    new pointAndColorPair(406, 322, 16777215),
-                    new pointAndColorPair(407, 332, 16777215),
-                    new pointAndColorPair(244, 312, 16777215)//81 272                
-                }),new Point(-30,-36));//search for them white boxen so we don't miss
+
+new pointAndColorPair(94, 258, 16776951),
+new pointAndColorPair(182, 258, 16776951),
+new pointAndColorPair(108, 289, 16776951),
+new pointAndColorPair(159, 296, 16776951),
+new pointAndColorPair(108, 355, 16776951),
+new pointAndColorPair(156, 362, 16776951),
+new pointAndColorPair(108, 488, 16776951),
+new pointAndColorPair(254, 497, 16776951),
+new pointAndColorPair(263, 490, 16750081),
+new pointAndColorPair(344, 492, 16750081),
+new pointAndColorPair(108, 555, 16776951),
+new pointAndColorPair(251, 550, 16750081)
+                }),new Point(-15,19));//search for the logo now (box changes color)
 
 
             smallSearchImage = new searchableImage(

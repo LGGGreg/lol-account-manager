@@ -37,6 +37,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1UserName = new System.Windows.Forms.Label();
             this.label1Password = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.button1LogDisplay = new System.Windows.Forms.Button();
             this.button1getBig = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +80,7 @@
             this.debugToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(380, 156);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(380, 134);
             this.contextMenuStrip1.Text = "LoL Account Manager LGG";
             // 
             // loLAccountManagerLGGToolStripMenuItem
@@ -111,6 +111,14 @@
             this.snapTestToolStripMenuItem.Text = "Snap Test";
             this.snapTestToolStripMenuItem.Visible = false;
             this.snapTestToolStripMenuItem.Click += new System.EventHandler(this.snapTestToolStripMenuItem_Click);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Visible = false;
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // comboBox1
             // 
@@ -167,7 +175,7 @@
             this.checkBox1RemeberUsername.ForeColor = System.Drawing.Color.White;
             this.checkBox1RemeberUsername.Location = new System.Drawing.Point(27, 129);
             this.checkBox1RemeberUsername.Name = "checkBox1RemeberUsername";
-            this.checkBox1RemeberUsername.Size = new System.Drawing.Size(176, 26);
+            this.checkBox1RemeberUsername.Size = new System.Drawing.Size(177, 26);
             this.checkBox1RemeberUsername.TabIndex = 5;
             this.checkBox1RemeberUsername.Text = "Remember Username";
             this.checkBox1RemeberUsername.UseVisualStyleBackColor = true;
@@ -179,7 +187,7 @@
             this.checkBox1RemeberPass.ForeColor = System.Drawing.Color.White;
             this.checkBox1RemeberPass.Location = new System.Drawing.Point(27, 155);
             this.checkBox1RemeberPass.Name = "checkBox1RemeberPass";
-            this.checkBox1RemeberPass.Size = new System.Drawing.Size(170, 26);
+            this.checkBox1RemeberPass.Size = new System.Drawing.Size(171, 26);
             this.checkBox1RemeberPass.TabIndex = 6;
             this.checkBox1RemeberPass.Text = "Remember Password";
             this.checkBox1RemeberPass.UseVisualStyleBackColor = true;
@@ -260,20 +268,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // debugToolStripMenuItem
-            // 
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(379, 26);
-            this.debugToolStripMenuItem.Text = "Debug";
-            this.debugToolStripMenuItem.Visible = false;
-            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
-            // 
             // MainLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(365, 192);
+            this.ClientSize = new System.Drawing.Size(365, 194);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button1getBig);
             this.Controls.Add(this.button1LogDisplay);

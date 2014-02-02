@@ -15,9 +15,12 @@ namespace LoLAccountManagerLGG
             x = _x;
             y = _y;
             icolor = _color;
-            color = Color.FromArgb((int)(icolor & 0x000000FF),
+            color = Color.FromArgb(
+                    //(int)(icolor & 0xFF000000) >> 24,
+                    (int)(icolor & 0x000000FF),
                     (int)(icolor & 0x0000FF00) >> 8,
                     (int)(icolor & 0x00FF0000) >> 16);
+
         }
 
     }
@@ -81,16 +84,21 @@ namespace LoLAccountManagerLGG
             {
                 for (scanY = 0; scanY < screenSize.Height; scanY++)
                 {
-                    if (bmp.GetPixel(scanX, scanY) == theFirstOne.color)
+                    Color foundPixel = bmp.GetPixel(scanX, scanY);
+                    if (foundPixel== theFirstOne.color)
                     {
                         bool complete = true;                            
                         //first color detected, check others now
+                        int pass = 0;
                         foreach (pointAndColorPair pp in pointPairs)
                         {
+                            pass++;
                             Point relativePosition = new Point(pp.x - theFirstOne.x, pp.y - theFirstOne.y);
                             try
                             {
-                                Color foundColor = bmp.GetPixel(scanX + relativePosition.X, scanY + relativePosition.Y);
+                                int checkX = scanX + relativePosition.X;
+                                int checkY = scanY + relativePosition.Y;
+                                Color foundColor = bmp.GetPixel(checkX,checkY);
                                 if (foundColor == pp.color)
                                 {
                                     //good!
@@ -104,11 +112,13 @@ namespace LoLAccountManagerLGG
                             }
                             catch 
                             {
+                                complete = false;
                                 //nothing important here
                             }
                         }
                         if (complete)
                         {
+
                             lastFoundPosition = new Point(scanX + loginOffset.X, scanY + loginOffset.Y);
                             return true;
                         }
