@@ -33,3 +33,15 @@ _**Previews**_
 
 ![Settings File Encryption](/Preview Images/6.png?raw=true "Settings File Encryption")
 
+
+
+**Code license**
+  * [GNU GPL v3](http://www.gnu.org/licenses/gpl.html)
+  
+**Content License**
+  * [Creative Commons 3.0 BY-SA](http://creativecommons.org/licenses/by-sa/3.0/)
+  
+**Code Of Conduct**
+  * Treat everyone with respect.
+  
+
